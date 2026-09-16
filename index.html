@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Only Exception — an interactive lyric experience</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body data-stage="1">
+  <div class="page-stars" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <h1 class="site-title">The Only Exception</h1>
+    <p class="site-subtitle">  </p>
+  </header>
+
+  <main class="app">
+
+ 
+    <section class="stage-wrap" id="stageWrap" aria-label="Pixel bedroom scene">
+      <div class="scene" id="scene" data-stage="1">
+
+        <div class="big-sky" id="bigSky">
+          <div class="big-moon"></div>
+          <div class="sky-stars" id="skyStars"></div>
+          <div class="hill hill-back"></div>
+          <div class="hill hill-mid"></div>
+          <div class="hill hill-front"></div>
+        </div>
+
+        <div class="room" id="room">
+          <div class="wall"></div>
+          <div class="floor"></div>
+          <div class="rug"></div>
+
+          <div class="window">
+            <div class="curtain-rod"></div>
+            <div class="curtain curtain-left"></div>
+            <div class="curtain curtain-right"></div>
+            <div class="window-glass">
+              <div class="window-moon"></div>
+              <div class="window-stars" id="windowStars"></div>
+            </div>
+            <button class="window-panes" id="windowBtn" type="button"
+                    aria-label="Open or close the window" aria-pressed="false">
+              <span class="pane pane-left"></span>
+              <span class="pane pane-right"></span>
+            </button>
+            <div class="window-sill"></div>
+          </div>
+
+          <div class="shelf"></div>
+          <button class="object-btn radio" id="radioBtn" type="button" aria-label="Radio: show what is playing">
+            <span class="radio-antenna"></span>
+            <span class="radio-speaker"></span>
+            <span class="radio-dial"></span>
+          </button>
+
+          <div class="plant" aria-hidden="true">
+            <span class="plant-leaves"></span>
+            <span class="plant-pot"></span>
+          </div>
+
+          <div class="table" aria-hidden="true">
+            <span class="table-top"></span>
+            <span class="table-body"></span>
+          </div>
+          <button class="object-btn lamp" id="lampBtn" type="button"
+                  aria-label="Turn the lamp on or off" aria-pressed="false">
+            <span class="lamp-shade"></span>
+            <span class="lamp-pole"></span>
+            <span class="lamp-base"></span>
+          </button>
+
+          <!-- Bed -->
+          <div class="bed" aria-hidden="true">
+            <span class="footboard"></span>
+            <span class="headboard"></span>
+            <span class="bed-frame"></span>
+            <span class="mattress"></span>
+            <span class="pillow"></span>
+            <span class="blanket"></span>
+            <span class="bed-leg bed-leg-left"></span>
+            <span class="bed-leg bed-leg-right"></span>
+          </div>
+
+          <button class="object-btn teddy" id="teddyBtn" type="button" aria-label="Teddy bear: say something">
+            <span class="teddy-ear teddy-ear-left"></span>
+            <span class="teddy-ear teddy-ear-right"></span>
+            <span class="teddy-head"></span>
+            <span class="teddy-eye teddy-eye-left"></span>
+            <span class="teddy-eye teddy-eye-right"></span>
+            <span class="teddy-body"></span>
+            <span class="teddy-belly"></span>
+          </button>
+
+          <div class="darkness"></div>
+          <div class="lamp-light"></div>
+        </div>
+
+        <div class="character sitting" id="character" aria-hidden="true">
+          <span class="char-hair"></span>
+          <span class="char-head"></span>
+          <span class="char-eye char-eye-left"></span>
+          <span class="char-eye char-eye-right"></span>
+          <span class="char-blush"></span>
+          <span class="char-body"></span>
+          <span class="char-leg char-leg-left"></span>
+          <span class="char-leg char-leg-right"></span>
+        </div>
+
+        <div class="particles" id="particles" aria-hidden="true"></div>
+      </div>
+
+      <div class="start-layer">
+        <button class="pixel-btn start-btn" id="startButton" type="button">► Play</button>
+      </div>
+
+      <p class="message" id="messageBox" role="status" aria-live="polite"></p>
+
+      <p class="speech-bubble" id="teddyBubble" aria-live="polite" hidden></p>
+
+      <div class="final-scene" id="finalScene" hidden>
+        <h2 class="final-title">The Only Exception</h2>
+        <button class="pixel-btn" id="finalReplayBtn" type="button">[ Replay ]</button>
+      </div>
+    </section>
+
+  
+    <section class="lyrics" aria-label="Lyrics">
+      <p class="lyric lyric-prev" id="lyricPrev"></p>
+      <p class="lyric lyric-current" id="lyricCurrent" aria-live="polite">Press play to begin ♪</p>
+      <p class="lyric lyric-next" id="lyricNext"></p>
+    </section>
+
+ 
+    <section class="player" aria-label="Music player">
+      <audio id="song" src="audio/song.mp3" preload="metadata"></audio>
+
+      <div class="player-screen">
+        <span>♪ Now playing</span>
+        <span>The Only Exception</span>
+      </div>
+
+      <div class="progress-row">
+        <span class="time" id="currentTime">0:00</span>
+        <input class="range" id="progressBar" type="range"
+               min="0" max="100" step="0.1" value="0" aria-label="Song progress">
+        <span class="time" id="totalTime">0:00</span>
+      </div>
+
+      <div class="controls-row">
+        <button class="pixel-btn btn-play" id="playPauseBtn" type="button" aria-label="Play">► Play</button>
+        <button class="pixel-btn" id="replayBtn" type="button" aria-label="Replay from the beginning">↺ Replay</button>
+        <label class="volume" for="volumeBar">
+          <span>Vol</span>
+          <input class="range" id="volumeBar" type="range" min="0" max="1" step="0.05" value="0.8">
+        </label>
+      </div>
+
+      <p class="player-hint">Click some stuffs in the room. Press <kbd>Space</kbd> to play or pause.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>©thirdy.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
