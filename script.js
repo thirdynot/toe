@@ -582,7 +582,7 @@ function setupEvents() {
   });
 
   volumeBar.addEventListener("input", function () {
-    audio.volume = Number(volumeBar.value);
+    song.volume = Number(volumeBar.value);
     volumeBar.style.setProperty("--fill", volumeBar.value * 100 + "%");
   });
 
@@ -617,7 +617,7 @@ function setupEvents() {
 
 
 function init() {
-  audio.volume = Number(volumeBar.value);
+  song.volume = Number(volumeBar.value);
   volumeBar.style.setProperty("--fill", volumeBar.value * 100 + "%");
 
   fitScene();
